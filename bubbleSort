@@ -1,0 +1,79 @@
+// { Driver Code Starts
+//Initial Template for Java
+
+import java.io.*;
+import java.util.*;
+class GfG
+{
+    public static void main (String[] args)
+    {
+        
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        
+        while(t-- > 0)
+        {
+            int n = sc.nextInt();
+            double avg = sc.nextDouble ();
+            int[] roll = new int[n];
+            int[] marks = new int[n];
+            
+            for (int i = 0; i < n; ++i)
+                roll[i] = sc.nextInt ();
+                
+            for (int i = 0; i < n; ++i)
+                marks[i] = sc.nextInt ();
+
+    		System.out.println (new Solution().shouldPunish (roll, marks, n, avg));
+        }
+        
+    }
+}
+
+// Contributed By: Pranay Bansal// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution
+{
+    public static int shouldPunish (int roll[], int marks[], int n, double avg)
+    {
+        // your code here
+       
+        boolean swap=false;
+        double swapCount=0;
+        double sum=0;
+        for(int i=0;i<n-1;i++){
+            swap=false;
+            for(int j=0;j<n-i-1;j++){
+              //   System.out.println(swapCount+" "+roll[j]+" "+roll[j+1]);
+                if(roll[j]>roll[j+1]){
+                    int temp=roll[j];
+                    roll[j]=roll[j+1];
+                    roll[j+1]=temp;
+                  swapCount+=2;
+                    swap=true;
+                }
+               
+                
+            
+            }
+            if(swap==false){
+                break;
+            }
+            
+        }
+       // System.out.println(swapCount);
+        for(int i=0;i<marks.length;i++){
+            sum+=marks[i];
+        }
+        sum=(sum-swapCount)/(double)(marks.length);
+        if(sum>=avg){
+            return 1;
+            
+        }else{
+            return 0;
+        }
+    }
+}
